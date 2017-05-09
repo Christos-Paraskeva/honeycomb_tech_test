@@ -16,11 +16,11 @@ describe Delivery do
       expect(@delivery.price).to eq(10)
     end
 
-    it 'has a discount_eligibility parameter within a hash' do
+    it 'has a default discount_eligibility parameter within a hash' do
       expect(@delivery.discount[:discount_eligibility]).to eq(false)
     end
 
-    it 'has a discount_price parameter within a hash' do
+    it 'has a default discount_price parameter within a hash' do
       expect(@delivery.discount[:discount_price]).to eq(false)
     end
   end

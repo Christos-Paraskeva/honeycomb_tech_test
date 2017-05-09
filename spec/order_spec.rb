@@ -1,6 +1,3 @@
-# require './models/broadcaster'
-# require './models/delivery'
-# require './models/material'
 require './models/order'
 
 describe Order do
