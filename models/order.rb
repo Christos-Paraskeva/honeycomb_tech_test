@@ -14,6 +14,8 @@ class Order
   end
 
   def add(broadcaster, delivery)
+    delivery.counter += 1
+    check_eligable_discount(delivery)
     items << [broadcaster, delivery]
   end
 
@@ -33,6 +35,18 @@ class Order
   end
 
   private
+
+  def check_eligable_discount(delivery)
+    if (delivery.discount[:discount_eligibility] != false)
+      calculate_discount(delivery)
+    end
+  end
+
+  def calculate_discount(delivery)
+    if (delivery.counter >= delivery.discount[:discount_eligibility])
+      delivery.price = delivery.discount[:discount_price]
+    end
+  end
 
   def print_information
     items.each_with_index do |(broadcaster, delivery), index|

@@ -4,7 +4,7 @@ describe Order do
   subject { Order.new material }
   let(:material) { Material.new 'HON/TEST001/010' }
   let(:standard_delivery) { Delivery.new(:standard, 10) }
-  let(:express_delivery) { Delivery.new(:express, 20) }
+  let(:express_delivery) { Delivery.new(:express, 20, 2, 15) }
 
   it 'is initialized with an instance of material' do
     expect(subject.material).to be_a Material
