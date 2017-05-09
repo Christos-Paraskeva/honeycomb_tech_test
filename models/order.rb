@@ -18,7 +18,6 @@ class Order
   end
 
   def total_cost
-    p items
     items.inject(0) { |memo, (_, delivery)| memo += delivery.price }
   end
 

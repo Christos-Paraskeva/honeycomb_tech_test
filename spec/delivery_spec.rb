@@ -6,14 +6,22 @@ describe Delivery do
     @delivery = Delivery.new('standard_delivery', 10)
   end
 
-  context 'is initialized with' do
+  context 'when initialized' do
 
-    it 'a name' do
+    it 'has a name' do
       expect(@delivery.name).to eq('standard_delivery')
     end
 
-    it 'a price' do
+    it 'has a price' do
       expect(@delivery.price).to eq(10)
+    end
+
+    it 'has a discount_eligibility parameter within a hash' do
+      expect(@delivery.discount[:discount_eligibility]).to eq(false)
+    end
+
+    it 'has a discount_price parameter within a hash' do
+      expect(@delivery.discount[:discount_price]).to eq(false)
     end
   end
 end
