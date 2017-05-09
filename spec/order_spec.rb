@@ -1,6 +1,6 @@
-require './models/broadcaster'
-require './models/delivery'
-require './models/material'
+# require './models/broadcaster'
+# require './models/delivery'
+# require './models/material'
 require './models/order'
 
 describe Order do
@@ -8,6 +8,10 @@ describe Order do
   let(:material) { Material.new 'HON/TEST001/010' }
   let(:standard_delivery) { Delivery.new(:standard, 10) }
   let(:express_delivery) { Delivery.new(:express, 20) }
+
+  it 'is initialized with an instance of material' do
+    expect(subject.material).to be_a Material
+  end
 
   context 'empty' do
     it 'costs nothing' do

@@ -14,8 +14,6 @@ describe Delivery do
 
     it 'a price' do
       expect(@delivery.price).to eq(10)
-      p @delivery
-
     end
   end
 end
