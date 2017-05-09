@@ -17,7 +17,7 @@ describe Order do
   end
 
   context 'when making an order' do
-    it 'adds order to items array' do
+    it 'adds order to the items array' do
       broadcaster_1 = Broadcaster.new(1, 'Viacom')
       subject.add broadcaster_1, standard_delivery
       expect(subject.items.length).to eq(1)
@@ -33,6 +33,18 @@ describe Order do
       subject.add broadcaster_2, express_delivery
 
       expect(subject.total_cost).to eq(30)
+    end
+  end
+
+  context 'with eligible discount' do
+    it 'returns the correct total of the items' do
+      broadcaster_1 = Broadcaster.new(1, 'Viacom')
+      broadcaster_2 = Broadcaster.new(2, 'Disney')
+      broadcaster_3 = Broadcaster.new(3, 'Discovery')
+      subject.add broadcaster_1, standard_delivery
+      subject.add broadcaster_2, express_delivery
+      subject.add broadcaster_3, express_delivery
+      expect(subject.total_cost).to eq(40)
     end
   end
 end
