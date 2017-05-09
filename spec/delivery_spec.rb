@@ -23,5 +23,9 @@ describe Delivery do
     it 'has a default discount_price parameter within a hash' do
       expect(@delivery.discount[:discount_price]).to eq(false)
     end
+
+    it 'has a counter' do
+      expect(@delivery.counter).to eq(0)
+    end
   end
 end
