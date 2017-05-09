@@ -6,13 +6,13 @@ describe Broadcaster do
     @broadcaster = Broadcaster.new(1, :test)
   end
 
-  context 'is initialized with' do
+  context 'when initialized' do
 
-    it 'an id' do
+    it 'has an id' do
       expect(@broadcaster.id).to eq(1)
     end
 
-    it 'a name' do
+    it 'has a name' do
       expect(@broadcaster.name).to eq(:test)
     end
   end
