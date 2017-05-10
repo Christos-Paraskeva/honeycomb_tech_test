@@ -4,9 +4,8 @@ describe Order do
   subject { Order.new material, discount}
   let(:material) { Material.new 'HON/TEST001/010' }
   let(:discount) { Discount.new }
-
-  let(:standard_delivery) { Delivery.new(:standard, 10) }
-  let(:express_delivery) { Delivery.new(:express, 20, 2, 15) }
+  let(:standard_delivery) { Delivery.new(:standard, 10.00) }
+  let(:express_delivery) { Delivery.new(:express, 20.00, 2, 15.00) }
 
   before(:each) do
     @broadcaster_1 = Broadcaster.new(1, 'Viacom')
@@ -41,16 +40,22 @@ describe Order do
     it 'returns the total cost of all items' do
       subject.add @broadcaster_1, standard_delivery
       subject.add @broadcaster_2, express_delivery
-      expect(subject.total_cost).to eq(30)
+      expect(subject.total_cost).to eq(30.00)
     end
   end
 
   context 'with eligible discount' do
-    it 'returns the correct total cost of the items' do
+    it 'returns the correct discount for delivery' do
+      subject.add @broadcaster_2, express_delivery
+      subject.add @broadcaster_3, express_delivery
+      expect(subject.total_cost).to eq(30.00)
+    end
+
+    it 'returns the correct discount for 10% off total' do
       subject.add @broadcaster_1, standard_delivery
       subject.add @broadcaster_2, express_delivery
       subject.add @broadcaster_3, express_delivery
-      expect(subject.total_cost).to eq(40)
+      expect(subject.total_cost).to eq(36.00)
     end
   end
 end

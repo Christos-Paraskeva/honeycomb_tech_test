@@ -16,12 +16,17 @@ class Order
 
   def add(broadcaster, delivery)
     delivery.order_count += 1
-    discount_eligibility_and_calculation(delivery)
+    delivery_discount_eligibility_and_calculation(delivery)
     items << [broadcaster, delivery]
   end
 
   def total_cost
-    items.inject(0) { |memo, (_, delivery)| memo += delivery.price }
+    total_cost = items.inject(0) { |memo, (_, delivery)| memo += delivery.price }
+    if (eligible_for_discount?(total_cost))
+      discount.calculate_total_cost(total_cost)
+    else
+      total_cost
+    end
   end
 
   def output
@@ -37,9 +42,13 @@ class Order
 
   private
 
-  def discount_eligibility_and_calculation(delivery)
+  def eligible_for_discount?(eligible_above = 30, total_cost)
+    (total_cost > eligible_above) ? true : false
+  end
+
+  def delivery_discount_eligibility_and_calculation(delivery)
     if (delivery.discount[:discount_eligibility] != false)
-      delivery.price = discount.calculate_delivery_discount(delivery)
+      delivery.price = discount.calculate_delivery(delivery)
     end
   end
 
