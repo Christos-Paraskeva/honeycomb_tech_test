@@ -7,7 +7,6 @@ describe Delivery do
   end
 
   context 'when initialized' do
-
     it 'has a name' do
       expect(@delivery.name).to eq('standard_delivery')
     end
@@ -25,7 +24,7 @@ describe Delivery do
     end
 
     it 'has a counter' do
-      expect(@delivery.counter).to eq(0)
+      expect(@delivery.order_count).to eq(0)
     end
   end
 end

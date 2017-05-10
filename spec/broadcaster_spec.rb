@@ -7,7 +7,6 @@ describe Broadcaster do
   end
 
   context 'when initialized' do
-
     it 'has an id' do
       expect(@broadcaster.id).to eq(1)
     end

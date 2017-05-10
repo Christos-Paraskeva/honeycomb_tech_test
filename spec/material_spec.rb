@@ -7,7 +7,6 @@ describe Material do
   end
 
   context 'is initialized with' do
-
     it 'an identifier' do
       expect(@material.identifier).to eq('WNP/SWCL001/010')
     end

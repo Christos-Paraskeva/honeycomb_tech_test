@@ -5,17 +5,18 @@ class Order
     price: 8
   }.freeze
 
-  attr_accessor :material, :items, :result
+  attr_accessor :material, :items, :result, :discount
 
-  def initialize(material)
+  def initialize(material, discount)
     self.material = material
     self.items = []
+    self.discount = discount
     @result = []
   end
 
   def add(broadcaster, delivery)
-    delivery.counter += 1
-    check_eligable_discount(delivery)
+    delivery.order_count += 1
+    discount_eligibility_and_calculation(delivery)
     items << [broadcaster, delivery]
   end
 
@@ -34,30 +35,13 @@ class Order
     end.join("\n")
   end
 
-
-
-
-
-
-  def calculate_discount(delivery)
-    if (delivery.counter >= delivery.discount[:discount_eligibility])
-      return delivery.price = delivery.discount[:discount_price]
-    end
-  end
-
   private
 
-  def check_eligable_discount(delivery)
+  def discount_eligibility_and_calculation(delivery)
     if (delivery.discount[:discount_eligibility] != false)
-      calculate_discount(delivery)
+      delivery.price = discount.calculate_discount(delivery)
     end
   end
-
-  # def calculate_discount(delivery)
-  #   if (delivery.counter >= delivery.discount[:discount_eligibility])
-  #     return delivery.price = delivery.discount[:discount_price]
-  #   end
-  # end
 
   def print_information
     items.each_with_index do |(broadcaster, delivery), index|

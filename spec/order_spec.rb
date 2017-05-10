@@ -1,8 +1,10 @@
 require './models/order'
 
 describe Order do
-  subject { Order.new material }
+  subject { Order.new material, discount}
   let(:material) { Material.new 'HON/TEST001/010' }
+  let(:discount) { Discount.new }
+
   let(:standard_delivery) { Delivery.new(:standard, 10) }
   let(:express_delivery) { Delivery.new(:express, 20, 2, 15) }
 
@@ -12,8 +14,14 @@ describe Order do
     @broadcaster_3 = Broadcaster.new(3, 'Discovery')
   end
 
-  it 'is initialized with an instance of material' do
-    expect(subject.material).to be_a Material
+  context 'when initialized' do
+    it 'has an instance of material' do
+      expect(subject.material).to be_a Material
+    end
+
+    it 'has an instance of discount' do
+      expect(subject.discount).to be_a Discount
+    end
   end
 
   context 'empty' do
@@ -38,29 +46,11 @@ describe Order do
   end
 
   context 'with eligible discount' do
-    it 'returns the correct total of the items' do
+    it 'returns the correct total cost of the items' do
       subject.add @broadcaster_1, standard_delivery
       subject.add @broadcaster_2, express_delivery
       subject.add @broadcaster_3, express_delivery
       expect(subject.total_cost).to eq(40)
-    end
-  end
-
-  context 'with eligible discount' do
-    it 'new' do
-      delivery = double("Delivery")
-      allow(delivery).to receive(:name).and_return("express_delivery")
-      allow(delivery).to receive(:price).and_return(20)
-      allow(delivery).to receive(:discount).and_return({
-        discount_eligibility: 2,
-        discount_price: 15
-      })
-      p delivery.discount[:discount_eligibility]
-      p delivery.discount[:discount_price]
-      p delivery.price
-      allow(delivery).to receive(:counter).and_return(2)
-
-      expect(subject.calculate_discount(delivery)).to eq(15)
     end
   end
 end
