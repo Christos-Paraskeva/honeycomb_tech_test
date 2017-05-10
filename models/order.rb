@@ -39,7 +39,7 @@ class Order
 
   def discount_eligibility_and_calculation(delivery)
     if (delivery.discount[:discount_eligibility] != false)
-      delivery.price = discount.calculate_discount(delivery)
+      delivery.price = discount.calculate_delivery_discount(delivery)
     end
   end
 
