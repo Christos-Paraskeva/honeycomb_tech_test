@@ -58,4 +58,12 @@ describe Order do
       expect(subject.total_cost).to eq(36.00)
     end
   end
+
+  context 'when printing' do
+    it 'calls the output method in the print class' do
+      printing = double("Printing")
+      allow(printing).to receive(:output).and_return(true)
+      expect(subject.send_to_printer(printing)).to eq(true)
+    end
+  end
 end

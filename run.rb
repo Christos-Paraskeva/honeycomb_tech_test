@@ -30,5 +30,5 @@ order.add broadcaster_4, express_delivery
 order.add broadcaster_5, express_delivery
 
 
-print order.output
+print order.send_to_printer
 print "\n"

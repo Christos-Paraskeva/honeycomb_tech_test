@@ -1,9 +1,6 @@
+require './models/printing'
+
 class Order
-  COLUMNS = {
-    broadcaster: 20,
-    delivery: 8,
-    price: 8
-  }.freeze
 
   attr_accessor :material, :items, :result, :discount
 
@@ -11,7 +8,6 @@ class Order
     self.material = material
     self.items = []
     self.discount = discount
-    @result = []
   end
 
   def add(broadcaster, delivery)
@@ -29,15 +25,8 @@ class Order
     end
   end
 
-  def output
-    [].tap do |result|
-      result << "Order for #{material.identifier}:"
-      result << print_columns
-      result << print_output_separator
-      result << print_information
-      result << print_output_separator
-      result << "Total: $#{total_cost}"
-    end.join("\n")
+  def send_to_printer(printing = Printing.new)
+    printing.output(total_cost, items, material)
   end
 
   private
@@ -50,24 +39,5 @@ class Order
     if (delivery.discount[:discount_eligibility] != false)
       delivery.price = discount.calculate_delivery(delivery)
     end
-  end
-
-  def print_information
-    items.each_with_index do |(broadcaster, delivery), index|
-      result << [
-        broadcaster.name.ljust(COLUMNS[:broadcaster]),
-        delivery.name.to_s.ljust(COLUMNS[:delivery]),
-        ("$#{delivery.price}").ljust(COLUMNS[:price])
-      ].join(' | ')
-    end
-    return result
-  end
-
-  def print_columns
-    COLUMNS.map { |name, width| name.to_s.ljust(width) }.join(' | ')
-  end
-
-  def print_output_separator
-    @output_separator ||= COLUMNS.map { |_, width| '-' * width }.join(' | ')
   end
 end
