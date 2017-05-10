@@ -26,12 +26,23 @@ class Order
   def output
     [].tap do |result|
       result << "Order for #{material.identifier}:"
-      result << columns
-      result << output_separator
+      result << print_columns
+      result << print_output_separator
       result << print_information
-      result << output_separator
+      result << print_output_separator
       result << "Total: $#{total_cost}"
     end.join("\n")
+  end
+
+
+
+
+
+
+  def calculate_discount(delivery)
+    if (delivery.counter >= delivery.discount[:discount_eligibility])
+      return delivery.price = delivery.discount[:discount_price]
+    end
   end
 
   private
@@ -42,11 +53,11 @@ class Order
     end
   end
 
-  def calculate_discount(delivery)
-    if (delivery.counter >= delivery.discount[:discount_eligibility])
-      delivery.price = delivery.discount[:discount_price]
-    end
-  end
+  # def calculate_discount(delivery)
+  #   if (delivery.counter >= delivery.discount[:discount_eligibility])
+  #     return delivery.price = delivery.discount[:discount_price]
+  #   end
+  # end
 
   def print_information
     items.each_with_index do |(broadcaster, delivery), index|
@@ -59,11 +70,11 @@ class Order
     return result
   end
 
-  def columns
+  def print_columns
     COLUMNS.map { |name, width| name.to_s.ljust(width) }.join(' | ')
   end
 
-  def output_separator
+  def print_output_separator
     @output_separator ||= COLUMNS.map { |_, width| '-' * width }.join(' | ')
   end
 end

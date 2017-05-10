@@ -45,4 +45,22 @@ describe Order do
       expect(subject.total_cost).to eq(40)
     end
   end
+
+  context 'with eligible discount' do
+    it 'new' do
+      delivery = double("Delivery")
+      allow(delivery).to receive(:name).and_return("express_delivery")
+      allow(delivery).to receive(:price).and_return(20)
+      allow(delivery).to receive(:discount).and_return({
+        discount_eligibility: 2,
+        discount_price: 15
+      })
+      p delivery.discount[:discount_eligibility]
+      p delivery.discount[:discount_price]
+      p delivery.price
+      allow(delivery).to receive(:counter).and_return(2)
+
+      expect(subject.calculate_discount(delivery)).to eq(15)
+    end
+  end
 end
