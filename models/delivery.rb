@@ -10,6 +10,7 @@ class Delivery
     }
     self.current_price = discount[:original_price]
     self.order_count = 0
+    check_discount_valid(discount[:discount_eligibility])
   end
 
   def increase_counter
@@ -19,5 +20,11 @@ class Delivery
 
   def decrease_counter
     self.order_count -= 1
+  end
+
+  private
+
+  def check_discount_valid(value)
+    raise ArgumentError unless (value.is_a? Integer) || (value == false)
   end
 end
