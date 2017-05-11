@@ -1,13 +1,11 @@
-Technologies and Approach
+## Technologies and Approach
 
 This application is built with:
-
-Ruby
+- Ruby
 
 And tested with:
-
-Rspec
-Coveralls
+- Rspec
+- Coveralls
 
 ## To use
 
