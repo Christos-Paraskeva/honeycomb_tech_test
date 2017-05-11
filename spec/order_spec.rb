@@ -87,10 +87,17 @@ describe Order do
     end
   end
 
-  context 'when printing' do
-    it 'calls the output method in the print class' do
+  context 'without eligible discount' do
+    it 'returns the correct amount for delivery' do
+      subject.add(@broadcaster_2, express_delivery)
+      expect(subject.total_cost).to eq(20.00)
+    end
+  end
+
+  context 'when order is checked out' do
+    it 'prints final order' do
       printing = spy("Printing")
-      subject.send_to_printer(printing)
+      subject.checkout_order(printing)
       expect(printing).to have_received(:output)
     end
   end

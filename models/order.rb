@@ -31,7 +31,7 @@ class Order
     end
   end
 
-  def send_to_printer(printing = Printing.new)
+  def checkout_order(printing = Printing.new)
     printing.output(total_cost, items, material)
   end
 
