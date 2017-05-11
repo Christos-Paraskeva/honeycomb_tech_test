@@ -11,8 +11,8 @@ describe Delivery do
       expect(@delivery.name).to eq('standard_delivery')
     end
 
-    it 'has a price' do
-      expect(@delivery.price).to eq(10)
+    it 'has an original price within a hash' do
+      expect(@delivery.discount[:original_price]).to eq(10)
     end
 
     it 'has a default discount_eligibility parameter within a hash' do
@@ -20,11 +20,31 @@ describe Delivery do
     end
 
     it 'has a default discount_price parameter within a hash' do
-      expect(@delivery.discount[:discount_price]).to eq(false)
+      expect(@delivery.discount[:discount_price]).to eq(@delivery.discount[:original_price])
+    end
+
+    it 'current price is same as original price by default' do
+      expect(@delivery.discount[:discount_price]).to eq(@delivery.discount[:original_price])
     end
 
     it 'has a counter' do
       expect(@delivery.order_count).to eq(0)
+    end
+  end
+
+  context 'counter' do
+    before(:each) do
+      @delivery.order_count = 5
+    end
+
+    it 'can be increased' do
+      @delivery.increase_counter
+      expect(@delivery.order_count).to eq(6)
+    end
+
+    it 'can be decreased' do
+      @delivery.decrease_counter
+      expect(@delivery.order_count).to eq(4)
     end
   end
 end

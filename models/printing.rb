@@ -29,7 +29,7 @@ class Printing
       order_information << [
         broadcaster.name.ljust(COLUMNS[:broadcaster]),
         delivery.name.to_s.ljust(COLUMNS[:delivery]),
-        ("$#{delivery.price}").ljust(COLUMNS[:price])
+        ("$#{delivery.current_price}").ljust(COLUMNS[:price])
       ].join(' | ')
     end
     order_information

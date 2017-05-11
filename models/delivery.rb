@@ -1,13 +1,23 @@
 class Delivery
-  attr_accessor :name, :price, :discount, :order_count
+  attr_accessor :name, :current_price, :discount, :order_count
 
-  def initialize(name, price, discount_eligibility = false, discount_price = false)
+  def initialize(name, original_price, discount_eligibility = false, discount_price = original_price)
     self.name = name
-    self.price = price
     self.discount = {
+      original_price: original_price,
       discount_eligibility: discount_eligibility,
-      discount_price: discount_price,
+      discount_price: discount_price
     }
+    self.current_price = discount[:original_price]
     self.order_count = 0
+  end
+
+  def increase_counter
+    order_count.inspect
+    self.order_count += 1
+  end
+
+  def decrease_counter
+    self.order_count -= 1
   end
 end

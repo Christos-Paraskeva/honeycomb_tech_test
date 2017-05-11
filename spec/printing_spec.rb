@@ -1,12 +1,12 @@
 require './models/printing'
 
-describe Printing do
+  describe Printing do
 
-  subject { Printing.new }
+    subject { Printing.new }
 
-  context 'when initialized' do
-    it 'contains an empty array for order information' do
-      expect(subject.order_information).to eq([])
+    context 'when initialized' do
+      it 'contains an empty array for order information' do
+        expect(subject.order_information).to eq([])
+      end
     end
   end
-end

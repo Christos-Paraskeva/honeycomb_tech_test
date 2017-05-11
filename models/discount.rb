@@ -4,7 +4,7 @@ class Discount
     if (delivery.order_count >= delivery.discount[:discount_eligibility])
       delivery.discount[:discount_price]
     else
-      delivery.price
+      delivery.current_price = delivery.discount[:original_price]
     end
   end
 
