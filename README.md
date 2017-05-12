@@ -18,8 +18,8 @@ And tested with:
 The delivery class takes 4 parameters:
 - Name
 - Price
-- Optional: Discount Condition (How many uses of this delivery method will constitute a discount) - This must be an Integer value
-- Optional - Discount Cost (Discount condition must be defined otherwise this will be ignored)
+- Optional: discount condition (how many uses of this delivery method will constitute a discount) - This must be an Integer value
+- Optional: discount cost (discount condition must be defined otherwise this will be ignored)
 
 **To run tests:**
 
@@ -74,7 +74,8 @@ Towards the end of the project, I wanted to visualize how this application will 
 
 I did initially implement an each loop to reset the postage costs back, but this approach felt wrong and messy to me, and I eventually decided that it makes more sense to visualize each individual order as a new instance of the Order class, which takes fresh postage methods / a new Material, etc.
 
-### Instructions for this exercise:  
+
+# Instructions for this exercise:  
 
 ## The challenge
 
