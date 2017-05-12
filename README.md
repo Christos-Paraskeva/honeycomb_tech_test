@@ -18,7 +18,9 @@ $ bundler install
 $ bundle
 ```
 - Run 'ruby run.rb' to see a print out of the order template
+
 ![printout_example](https://github.com/Christos-Paraskeva/honeycomb_tech_test/blob/master/screenshots/printout.jpg)
+
 
 **Useful information:**
 
