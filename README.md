@@ -10,8 +10,15 @@ And tested with:
 ## To use
 
 - Clone this repo
-- In project root, run 'bundle install' to install necessary gems
+- Once the repo has been cloned, go to project root
+- You should first install and run bundle to install all gems in the gem file needed for the program to function correctly.
+
+```
+$ bundler install
+$ bundle
+```
 - Run 'ruby run.rb' to see a print out of the order template
+![printout_example](http://imgur.com/a/L7ENU)
 
 **Useful information:**
 
@@ -25,6 +32,9 @@ The delivery class takes 4 parameters:
 
 - Ensure the correct gems are installed
 - Run 'rspec' in the project root
+```
+$ rspec
+```
 
 ## Approach
 
