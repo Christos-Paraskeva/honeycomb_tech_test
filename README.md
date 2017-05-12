@@ -1,4 +1,4 @@
-## Technologies and Approach
+## Technologies
 
 This application is built with:
 - Ruby
