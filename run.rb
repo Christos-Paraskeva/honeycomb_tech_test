@@ -42,3 +42,4 @@ print "\n"
 print ".........................................."
 print "\n"
 print order_2.checkout_order
+print "\n"
